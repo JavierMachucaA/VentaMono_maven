@@ -1,0 +1,49 @@
+<!-- src/main/resources/templates/ventas.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista de Ventas</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4 mb-4">Listado de Ventas</h1>
+    <!-- Botón para ir al formulario de nueva venta -->
+    <a th:href="@{/ventas/nuevo}" class="btn btn-primary mb-3">Nueva Venta</a>
+    <!-- Tabla de ventas -->
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterar sobre la lista de ventas enviada en el modelo -->
+        <tr th:each="venta : ${listaVentas}">
+            <td th:text="${venta.id}">1</td>
+            <td th:text="${venta.producto}">Producto</td>
+            <td th:text="${venta.cantidad}">0</td>
+            <td th:text="${venta.precio}">0.0</td>
+            <td th:text="${venta.fecha}">2025-01-01</td>
+            <td>
+                <!-- Enlaces para editar o eliminar la venta -->
+                <a th:href="@{'/ventas/editar/' + ${venta.id}}" class="btn btn-secondary btn-sm">Editar</a>
+                <a th:href="@{'/ventas/eliminar/' + ${venta.id}}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Está seguro de eliminar esta venta?');">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

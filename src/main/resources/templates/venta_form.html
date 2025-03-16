@@ -1,0 +1,38 @@
+<!-- src/main/resources/templates/venta_form.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${venta.id} == null ? 'Nueva Venta' : 'Editar Venta'">Formulario Venta</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4 mb-4" th:text="${venta.id} == null ? 'Nueva Venta' : 'Editar Venta'">Nueva Venta</h2>
+    <form th:action="@{/ventas}" th:object="${venta}" method="post">
+        <div class="mb-3">
+            <label th:for="*{producto}" class="form-label">Producto:</label>
+            <input type="text" th:field="*{producto}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label th:for="*{cantidad}" class="form-label">Cantidad:</label>
+            <input type="number" th:field="*{cantidad}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label th:for="*{precio}" class="form-label">Precio:</label>
+            <input type="number" step="0.01" th:field="*{precio}" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label th:for="*{fecha}" class="form-label">Fecha:</label>
+            <input type="date" th:field="*{fecha}" class="form-control" required />
+        </div>
+        <!-- Campo oculto para el ID (se llena automáticamente si la venta ya existe) -->
+        <input type="hidden" th:field="*{id}" />
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a th:href="@{/ventas}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>
